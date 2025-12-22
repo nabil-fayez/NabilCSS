@@ -1,0 +1,24 @@
+// Example Button Component (Hybrid: uses utilities)
+.btn {
+  display: inline-block;
+  padding: map-get($gutters, md) map-get($gutters, lg);
+  border-radius: map-get($radii, md);
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &.primary {
+    background-color: nth(map-get($colors, primary), 1);
+    color: nth(map-get($colors, primary), 3);
+    &:hover { background-color: nth(map-get($colors, primary), 2); }
+  }
+
+  // Generate for all colors
+  @each $name, $values in $colors {
+    &.#{$name} {
+      background-color: nth($values, 1);
+      color: nth($values, 3);
+      &:hover { background-color: nth($values, 2); }
+    }
+  }
+}

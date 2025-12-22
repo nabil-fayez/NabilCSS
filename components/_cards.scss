@@ -1,0 +1,10 @@
+// Example Card Component
+.card {
+  background-color: map-get($base-colors, base-100);
+  padding: map-get($gutters, lg);
+  border-radius: map-get($radii, lg);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+  .card-title { @extend h4; }
+  .card-body { @extend .b4; }
+}

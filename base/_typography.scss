@@ -1,0 +1,70 @@
+@import "../settings/variables";
+@import "../settings/mixins";
+
+@include generate-font-vars(
+  $fonts
+); // Generate --font-family-body, etc. dynamically
+
+// Font Weights
+@each $name, $weight in $font-weights {
+  .weight-#{$name} {
+    font-weight: $weight;
+  }
+}
+
+// For body typography: generate dynamically for each font
+@each $font-key, $font-value in $fonts {
+  @each $name, $sizes in $body-sizes {
+    .#{$name}-#{$font-key} {
+      font-family: var(--font-family-#{$font-key});
+      font-size: nth($sizes, 1);
+      line-height: nth($sizes, 2);
+      @media (max-width: 768px) {
+        font-size: nth($sizes, 3);
+        line-height: nth($sizes, 4);
+      }
+    }
+  }
+}
+
+// For headings: generate dynamically for each font
+@each $font-key, $font-value in $fonts {
+  @each $name, $sizes in $heading-sizes {
+    .#{$name}-#{$font-key} {
+      font-family: var(--font-family-#{$font-key});
+      font-size: nth($sizes, 1);
+      line-height: nth($sizes, 2);
+      @media (max-width: 768px) {
+        font-size: nth($sizes, 3);
+        line-height: nth($sizes, 4);
+      }
+    }
+  }
+}
+
+// Default fallbacks for body (use simple extend)
+@each $name, $sizes in $body-sizes {
+  .#{$name} {
+    @extend .#{$name}-body; // Extend simple class
+  }
+}
+
+// Default fallbacks for headings (assign directly or extend simple classes)
+h1 {
+  @extend .h1-heading;
+}
+h2 {
+  @extend .h2-heading;
+}
+h3 {
+  @extend .h3-heading;
+}
+h4 {
+  @extend .h4-heading;
+}
+h5 {
+  @extend .h5-heading;
+}
+h6 {
+  @extend .h6-heading;
+}

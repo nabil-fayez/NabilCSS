@@ -1,0 +1,7 @@
+@import "../utilities/grid";  // Extend grid if needed for layouts
+
+// Example Hybrid Grid Layout
+.grid-layout {
+  @extend .row;
+  // Custom layouts using columns
+}

@@ -1,0 +1,10 @@
+// Example Navbar
+.navbar {
+  @extend .flex;
+  @extend .justify-between;
+  @extend .align-center;
+  background-color: map-get($base-colors, base-200);
+  padding: map-get($gutters, md) map-get($gutters, lg);
+
+  .nav-item { margin-left: map-get($gutters, md); }
+}

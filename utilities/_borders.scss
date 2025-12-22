@@ -1,0 +1,14 @@
+@import "../settings/variables";
+@import "../settings/mixins";
+
+@each $size, $value in $radii {
+  .rounded-#{$size} {
+    border-radius: $value;
+  }
+}
+
+// Generate border colors dynamically for new colors
+@each $name, $values in $colors {
+  .border-#{$name} { border-color: nth($values, 1); }
+  .border-#{$name}-focus { border-color: nth($values, 2); }
+}

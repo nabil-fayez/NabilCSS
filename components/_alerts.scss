@@ -1,0 +1,11 @@
+// Example Alert
+.alert {
+  padding: map-get($gutters, md);
+  border-radius: map-get($radii, md);
+
+  &.success { background-color: nth(map-get($colors, accent), 1); color: nth(map-get($colors, accent), 3); }
+  // Generate for colors
+  @each $name, $values in $colors {
+    &.#{$name} { background-color: nth($values, 1); color: nth($values, 3); }
+  }
+}

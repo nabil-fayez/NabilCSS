@@ -1,0 +1,173 @@
+// Mixin to generate color classes dynamically
+@mixin generate-colors($map) {
+  @each $name, $values in $map {
+    .#{$name} {
+      color: nth($values, 1);
+    }
+    .#{$name}-focus {
+      color: nth($values, 2);
+    }
+    .#{$name}-content {
+      color: nth($values, 3);
+    }
+  }
+}
+
+// Mixin for base colors (bg and text)
+@mixin generate-base-colors($map) {
+  @each $name, $value in $map {
+    .#{$name} {
+      background-color: $value;
+    }
+    @if $name == base-content {
+      .#{$name} {
+        color: $value;
+      }
+    }
+  }
+}
+
+// Mixin for spacing utilities
+@mixin generate-spacing($map) {
+  @each $size, $value in $map {
+    @if $size != none {
+      .mt-#{$size} {
+        margin-top: $value;
+      }
+      .mb-#{$size} {
+        margin-bottom: $value;
+      }
+      .ml-#{$size} {
+        margin-left: $value;
+      }
+      .mr-#{$size} {
+        margin-right: $value;
+      }
+      .pt-#{$size} {
+        padding-top: $value;
+      }
+      .pb-#{$size} {
+        padding-bottom: $value;
+      }
+      .pl-#{$size} {
+        padding-left: $value;
+      }
+      .pr-#{$size} {
+        padding-right: $value;
+      }
+      .m-#{$size} {
+        margin: $value;
+      }
+      .p-#{$size} {
+        padding: $value;
+      }
+      .mx-#{$size} {
+        margin-left: $value;
+        margin-right: $value;
+      }
+      .my-#{$size} {
+        margin-top: $value;
+        margin-bottom: $value;
+      }
+      .px-#{$size} {
+        padding-left: $value;
+        padding-right: $value;
+      }
+      .py-#{$size} {
+        padding-top: $value;
+        padding-bottom: $value;
+      }
+      // Logical for RTL
+      .ms-#{$size} {
+        margin-inline-start: $value;
+      }
+      .me-#{$size} {
+        margin-inline-end: $value;
+      }
+      .ps-#{$size} {
+        padding-inline-start: $value;
+      }
+      .pe-#{$size} {
+        padding-inline-end: $value;
+      }
+    }
+  }
+}
+
+// Mixin for media queries
+@mixin media($breakpoint) {
+  $bp: map-get($breakpoints, $breakpoint);
+  @media (min-width: nth($bp, 1)) {
+    @content;
+  }
+}
+
+// Mixin for grid columns per breakpoint
+@mixin generate-grid-columns($prefix: "") {
+  @for $i from 1 through $grid-columns {
+    .col#{$prefix}-#{$i} {
+      flex: 0 0 percentage($i / $grid-columns);
+      max-width: percentage($i / $grid-columns);
+    }
+  }
+  @for $i from 0 through $grid-columns - 1 {
+    .offset#{$prefix}-#{$i} {
+      margin-left: percentage($i / $grid-columns);
+    }
+  }
+}
+
+// Mixin for RTL property swap
+@mixin rtl-swap($ltr-prop, $ltr-value, $rtl-prop, $rtl-value) {
+  #{$ltr-prop}: $ltr-value;
+  [dir="rtl"] & {
+    #{$rtl-prop}: $rtl-value;
+  }
+}
+
+// Mixin for typography
+@mixin typography($selector, $font-family, $sizes) {
+  #{$selector} {
+    font-family: $font-family;
+    font-size: nth($sizes, 1);
+    line-height: nth($sizes, 2);
+  }
+  @media (max-width: 768px) {
+    #{$selector} {
+      font-size: nth($sizes, 3);
+      line-height: nth($sizes, 4);
+    }
+  }
+}
+
+// Mixin for generating background colors dynamically
+@mixin generate-bg-colors($map) {
+  @each $name, $values in $map {
+    .bg-#{$name} {
+      background-color: nth($values, 1);
+    }
+    .bg-#{$name}-focus {
+      background-color: nth($values, 2);
+    }
+  }
+}
+
+@mixin generate-font-imports($map) {
+  $url: "https://fonts.googleapis.com/css2?";
+  $families: ();
+  @each $key, $value in $map {
+    $name: map-get($value, name);
+    $params: map-get($value, params);
+    $families: append($families, "family=#{$name}:#{$params}", comma);
+  }
+  $url: $url + join($families, "&");
+  @import url("#{$url}");
+}
+
+@mixin generate-font-vars($map) {
+  :root {
+    @each $key, $value in $map {
+      --font-family-#{$key}: #{map-get($value, name)}, sans-serif;
+    }
+  }
+}

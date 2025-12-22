@@ -1,0 +1,7 @@
+// Example Form
+.form-input {
+  padding: map-get($gutters, sm) map-get($gutters, md);
+  border: 1px solid map-get($base-colors, base-300);
+  border-radius: map-get($radii, sm);
+  &:focus { border-color: nth(map-get($colors, primary), 1); }
+}

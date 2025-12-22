@@ -1,0 +1,15 @@
+.d-none { display: none; }
+.d-block { display: block; }
+.d-inline { display: inline; }
+.d-inline-block { display: inline-block; }
+.d-flex { display: flex; }
+.d-grid { display: grid; }
+
+// Responsive Display (example for sm)
+@each $bp-name in map-keys($breakpoints) {
+  @include media($bp-name) {
+    .d-#{$bp-name}-none { display: none; }
+    .d-#{$bp-name}-block { display: block; }
+    // Add more as needed
+  }
+}

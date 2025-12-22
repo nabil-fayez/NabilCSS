@@ -1,0 +1,6 @@
+@import "../settings/variables";
+@import "../settings/mixins";
+
+@include generate-colors($colors);
+@include generate-base-colors($base-colors);
+@include generate-bg-colors($colors); 

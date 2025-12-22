@@ -1,0 +1,36 @@
+@import "../settings/variables";
+@import "../settings/mixins";
+
+@include generate-spacing($gutters);
+
+// RTL Overrides for Spacing
+@each $size, $value in $gutters {
+  @if $size != none {
+    [dir="rtl"] .ml-#{$size} {
+      margin-inline-end: $value;
+      margin-left: 0 !important;
+    }
+    [dir="rtl"] .mr-#{$size} {
+      margin-inline-start: $value;
+      margin-right: 0 !important;
+    }
+    [dir="rtl"] .pl-#{$size} {
+      padding-inline-end: $value;
+      padding-left: 0 !important;
+    }
+    [dir="rtl"] .pr-#{$size} {
+      padding-inline-start: $value;
+      padding-right: 0 !important;
+    }
+  }
+}
+
+.mxauto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.myauto {
+  margin-top: auto;
+  margin-bottom: auto;
+}

@@ -6,24 +6,32 @@
   display: flex;
   flex-wrap: wrap;
   @include rtl-swap(
-    margin-left,calc(var(--grid-gap) / -2),
-    margin-right,calc(var(--grid-gap) / -2)
+    margin-left,
+    calc(var(--grid-gap) / -2),
+    margin-right,
+    calc(var(--grid-gap) / -2)
   );
   @include rtl-swap(
-    margin-right,calc(var(--grid-gap) / -2),
-    margin-left,calc(var(--grid-gap) / -2)
+    margin-right,
+    calc(var(--grid-gap) / -2),
+    margin-left,
+    calc(var(--grid-gap) / -2)
   );
 }
 
 // Base Columns
 [class*="col-"] {
   @include rtl-swap(
-    padding-left, calc(var(--grid-gap) / 2),
-    padding-right, calc(var(--grid-gap) / 2)
+    padding-left,
+    calc(var(--grid-gap) / 2),
+    padding-right,
+    calc(var(--grid-gap) / 2)
   );
   @include rtl-swap(
-    padding-right, calc(var(--grid-gap) / 2),
-    padding-left, calc(var(--grid-gap) / 2)
+    padding-right,
+    calc(var(--grid-gap) / 2),
+    padding-left,
+    calc(var(--grid-gap) / 2)
   );
   box-sizing: border-box;
   flex-basis: 0;
@@ -46,9 +54,9 @@
 }
 
 // RTL for Offsets
-@each $bp in ('', '-xs', '-sm', '-md', '-lg', '-xl', '-xxl', '-xxxl') {
+@each $bp-name, $bp-values in $breakpoints {
   @for $i from 0 through $grid-columns - 1 {
-    [dir="rtl"] .offset#{$bp}-#{$i} {
+    [dir="rtl"] .offset#{$bp-name}-#{$i} {
       margin-inline-start: percentage($i / $grid-columns);
       margin-left: 0 !important;
     }
